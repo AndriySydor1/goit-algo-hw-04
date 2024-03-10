@@ -33,40 +33,43 @@ print(cats_info)
     {"id": "60b90c4613067a15887e1ae5", "name": "Tessi", "age": "5"},
 ]  
 '''
-'''   
-def get_cats_info(path):
-    cats_list = []
-    
-    try:
-        with open(path, 'r', encoding='utf-8') as file:
-            for line in file:
-                # Розділити рядок за комою та отримати ідентифікатор, ім'я та вік кота
-                cat_data = line.strip().split(',')
-                
-                # Створити словник для кожного кота та додати його до списку
-                cat_info = {
-                    "id": cat_data[0],
-                    "name": cat_data[1],
-                    "age": cat_data[2]
-                }
-                cats_list.append(cat_info)
-    
-    except FileNotFoundError:
-        print(f"Файл '{path}' не знайдено.")
-    except Exception as e:
-        print(f"Виникла помилка: {e}")
+   
+import logging
 
-    return cats_list
+def get_cats_info(path):
+    cats_info = []
+
+    try:
+        with open(path, 'r', encoding='utf-8-sig') as file:  # Використовуємо utf-8-sig для врахування BOM
+            for line_number, line in enumerate(file, start=1):
+                try:
+                    # Розділяємо рядок на частини за комою
+                    cat_data = line.strip().split(',')
+                    
+                    # Створюємо словник з інформацією про кота
+                    cat_info = {
+                        "id": cat_data[0],
+                        "name": cat_data[1],
+                        "age": int(cat_data[2])  # Конвертуємо вік у число
+                    }
+                    
+                    # Додаємо словник до списку
+                    cats_info.append(cat_info)
+                except ValueError as ve:
+                    logging.warning(f"Error parsing line {line_number}: {ve}")
+    except FileNotFoundError:
+        logging.error(f"File not found: {path}")
+    except Exception as e:
+        logging.error(f"An error occurred: {e}")
+
+    return cats_info
 
 # Приклад використання функції
-cats_info = get_cats_info("path/to/cats_file.txt")
+cats_info = get_cats_info("D:/Projects/Python-HW4/cats_file.txt")
 print(cats_info)
-'''
-''' Результат виконання програми:  
-Файл 'path/to/cats_file.txt' не знайдено.
-[] '''
-''' Важливо враховувати, що цей код обробляє можливі винятки, такі як відсутність файлу чи помилки при читанні файлу.
-Також використовується блок with, щоб гарантувати правильне закриття файлу після виконання операцій.  ''' 
+
+
+
 
    
 

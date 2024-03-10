@@ -21,11 +21,10 @@ Sitarama Raju,1000
 Повинна бути обробка випадків, коли файл відсутній або пошкоджений.
 Код має бути чистим, добре структурованим і зрозумілим.
 Приклад використання функції:
-total, average = total_salary("path/to/salary_file.txt")
+total, average = total_salary("D:/Projects/Python-HW4/salary_file.txt")
 print(f"Загальна сума заробітної плати: {total}, Середня заробітна плата: {average}")
 Очікуваний результат:
 Загальна сума заробітної плати: 6000, Середня заробітна плата: 2000   
-'''
 '''
  
 def total_salary(path):
@@ -51,20 +50,10 @@ def total_salary(path):
         print(f"Помилка: {e}")
 
 # Приклад використання
-total, average = total_salary("path/to/salary_file.txt")
+total, average = total_salary("D:/Projects/Python-HW4/salary_file.txt")
 
 if total is not None and average is not None:
     print(f"Загальна сума заробітної плати: {total}, Середня заробітна плата: {average}")   
-'''
 
-'''    Результат виконання програми: 
-Помилка: Файл 'path/to/salary_file.txt' не знайдено.
-Traceback (most recent call last):
-  File "d:\Projects\Python-HW4\hw4-1.py", line 52, in <module>
-    total, average = total_salary("path/to/salary_file.txt")  
-TypeError: cannot unpack non-iterable NoneType object 
-
-Важливо врахувати, що цей код передбачає, що дані у файлі завжди будуть коректними (прізвище та заробітна плата завжди вказані, розділені комою).
-Якщо дані можуть бути некоректними, можливо, вам слід розглянути додаткову обробку винятків для неправильного формату рядків у файлі. '''
 
 
